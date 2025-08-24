@@ -1,0 +1,107 @@
+version: "3.8"
+services:
+  portainer:
+    image: portainer/portainer-ee
+    container_name: portainer
+    hostname: portainer
+    restart: unless-stopped
+    volumes:
+      #- /mnt/external/docker/portainer:/data
+      - ${DOCKER_ROOT:-/srv/docker}/portainer:/data
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - "9000:9000"
+
+  nginx:
+    image: "jc21/nginx-proxy-manager:latest"
+    container_name: nginx
+    hostname: nginx
+    restart: unless-stopped
+    ports:
+      - "80:80" # Public HTTP Port
+      - "443:443" # Public HTTPS Port
+      - "81:81" # Admin Web Port
+      # Add any other Stream port you want to expose
+      # - '21:21' # FTP
+
+    # Uncomment the next line if you uncomment anything in the section
+    # environment:
+    # Uncomment this if you want to change the location of
+    # the SQLite DB file within the container
+    # DB_SQLITE_FILE: "/data/database.sqlite"
+
+    # Uncomment this if IPv6 is not enabled on your host
+    # DISABLE_IPV6: 'true'
+    volumes:
+      - ${DOCKER_ROOT:-/srv/docker}/nginx/data:/data
+      - ${DOCKER_ROOT:-/srv/docker}/nginx/letsencrypt:/etc/letsencrypt
+  # ollama:
+  #   volumes:
+  #     - /mnt/external/docker/ollama:/root/.ollama
+  #   container_name: ollama
+  #   pull_policy: always
+  #   tty: true
+  #   restart: unless-stopped
+  #   image: ollama/ollama:${OLLAMA_DOCKER_TAG-latest}
+  #
+
+  searxng:
+    image: searxng/searxng:latest
+    container_name: searxng
+    ports:
+      - "8085:8080"
+    volumes:
+      - ${DOCKER_ROOT:-/srv/docker}/searxng:/etc/searxng
+    restart: always
+
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: open-webui
+    volumes:
+      - ${DOCKER_ROOT:-/srv/docker}/open-webui:/app/backend/data
+    ports:
+      - 3000:8080
+    env_file:
+      - .env
+    environment:
+      - "ENABLE_RAG_WEB_SEARCH=${ENABLE_RAG_WEB_SEARCH}"
+      - "RAG_WEB_SEARCH_ENGINE=${RAG_WEB_SEARCH_ENGINE}"
+      - "RAG_WEB_SEARCH_RESULT_COUNT=${RAG_WEB_SEARCH_RESULT_COUNT}"
+      - "RAG_WEB_SEARCH_CONCURRENT_REQUESTS=${RAG_WEB_SEARCH_CONCURRENT_REQUESTS}"
+      - "SEARXNG_QUERY_URL=${SEARXNG_QUERY_URL}"
+      - "OLLAMA_BASE_URL=${OLLAMA_BASE_URL}"
+      - "WEBUI_SECRET_KEY=${WEBUI_SECRET_KEY}"
+      - "WEBUI_URL=${WEBUI_URL}"
+      - "OPENAI_API_KEY=${OPENAI_API_KEY}"
+
+  uglyfeed: # Defines a service named 'uglyfeed'.
+    image: fabriziosalmi/uglyfeed:latest # The Docker image to use for this service, tagged with 'latest'.
+    ports:
+      - "8001:8001" # Maps port 8001 on the host to port 8001 in the container.
+      - "8501:8501" # Maps port 8501 on the host to port 8501 in the container.
+    volumes:
+      - ${DOCKER_ROOT:-/srv/docker}/uglyfeed/feeds.txt:/app/input/feeds.txt # Mounts the local file 'feeds.txt' to '/app/input/feeds.txt' in the container.
+      - ${DOCKER_ROOT:-/srv/docker}/uglyfeed/config.yaml:/app/config.yaml # Mounts the local file 'config.yaml' to '/app/config.yaml' in the container.
+    container_name: uglyfeed # Sets the container's name to 'uglyfeed' for easier identification and management
+
+  budibase:
+    restart: unless-stopped
+    image: budibase/budibase:latest
+    ports:
+      - "10000:80"
+    env_file:
+      - .env
+    environment:
+      JWT_SECRET: ${JWT_SECRET}
+      MINIO_ACCESS_KEY: ${MINIO_ACCESS_KEY}
+      MINIO_SECRET_KEY: ${MINIO_SECRET_KEY}
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+      COUCHDB_USER: ${COUCHDB_USER}
+      COUCHDB_PASSWORD: ${COUCHDB_PASSWORD}
+      INTERNAL_API_KEY: ${INTERNAL_API_KEY}
+    volumes:
+      - budibase_data:/data
+
+volumes:
+  budibase_data:
+    driver: local

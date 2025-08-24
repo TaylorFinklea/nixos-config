@@ -1,0 +1,110 @@
+#!/usr/bin/env sh
+# the scripting-addition must be loaded manually if
+# you are running yabai on macOS Big Sur. Uncomment
+# the following line to have the injection performed
+# when the config is executed during startup.
+#
+# first you need to disable system integrity
+# - https://github.com/koekeishiya/yabai/wiki/Disabling-System-Integrity-Protection
+# then follow this guide:
+#  - https://github.com/koekeishiya/yabai/wiki/Installing-yabai-(latest-release)
+yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
+sudo yabai --load-sa
+
+launchctl unload -F /System/Library/LaunchAgents/com.apple.WindowManager.plist
+
+# bar settings
+#yabai -m config top_padding 0
+
+## GLOBAL
+yabai -m config mouse_follows_focus          off
+yabai -m config focus_follows_mouse          autofocus
+
+yabai -m config window_placement             second_child
+yabai -m config window_topmost               off
+
+yabai -m config window_opacity               on
+yabai -m config window_opacity_duration      0.5
+yabai -m config window_shadow                on
+
+yabai -m config window_border 		     on
+yabai -m config window_border_width	     4
+yabai -m config active_window_border_color   0xffff8616
+
+yabai -m config active_window_opacity        1.0
+yabai -m config normal_window_opacity        0.90
+yabai -m config split_ratio                  0.50
+yabai -m config auto_balance                 off
+
+## MOUSE
+yabai -m config mouse_modifier               alt
+yabai -m config mouse_action1                move
+yabai -m config mouse_action2                resize
+
+## GENERAL
+yabai -m config layout                       bsp
+yabai -m config top_padding                  8
+yabai -m config bottom_padding               8
+yabai -m config left_padding                 8
+yabai -m config right_padding                8
+yabai -m config window_gap                   8
+
+## FLOAT
+# System
+yabai -m rule --add app='^System Information$' manage=off
+yabai -m rule --add app='^System Preferences$' manage=off
+yabai -m rule --add title='Preferences$' manage=off
+
+# Settings 
+yabai -m rule --add title='Settings$' manage=off
+
+# Other windows
+yabai -m rule --add app='Greenshot' manage=off
+yabai -m rule --add app='OBS$' manage=off
+yabai -m rule --add app='LICEcap$' manage=off
+yabai -m rule --add title='LICEcap$' manage=off
+
+yabai -m rule --add app='CARROT Weather$' manage=off
+yabai -m rule --add title='CARROT Weather$' manage=off
+
+yabai -m rule --add title="^Microsoft Teams Notification$" manage=off
+
+# sketchybar utils
+yabai -m signal --add event=window_focused action="sketchybar --trigger window_focus"
+yabai -m signal --add event=window_created action="sketchybar --trigger windows_on_spaces"
+yabai -m signal --add event=window_destroyed action="sketchybar --trigger windows_on_spaces"
+
+# # DEFEAT TEAMS
+# yabai -m signal --add \
+#       event=application_activated \
+#       app="^Microsoft Teams classic$" \
+#       action='${HOME}/.config/yabai/scripts/defeat-teams'
+#
+# yabai -m signal --add \
+#       event=window_focused \
+#       app="^Microsoft Teams classic$" \
+#       title="^Microsoft Teams Notification$" \
+#       action='${HOME}/.config/yabai/scripts/defeat-teams'
+#
+
+#yabai -m rule --add app='Xcode$' manage=off
+
+## Some Goland settings, in case you are using it. float Goland Preference panes
+#yabai -m rule --add app='Goland IDEA' title='^$' manage=off
+#yabai -m rule --add app='Goland IDEA' title='Project Structure' manage=off
+#yabai -m rule --add app='Goland IDEA' title='Preferences' manage=off
+#yabai -m rule --add app='Goland IDEA' title='Edit configuration' manage=off
+
+# spacebar padding on top screen
+yabai -m config external_bar all:0:35
+
+/opt/homebrew/bin/borders active_color=0xffff8616 inactive_color=0x00494d64 width=5.0 2>/dev/null 1>&2 &
+
+# add these lines to the bottom of your yabairc file
+# they're needed to trigger a custom event in sketchybar that we will later define in sketchybarrc
+
+yabai -m signal --add event=window_created action="sketchybar -m --trigger window_change &> /dev/null"
+yabai -m signal --add event=window_destroyed action="sketchybar -m --trigger window_change &> /dev/null"
+
+echo "yabai configuration loaded.."
+

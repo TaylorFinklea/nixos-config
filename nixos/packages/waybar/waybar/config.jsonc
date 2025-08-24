@@ -1,0 +1,225 @@
+{
+  "layer": "top", // Waybar at top layer
+  // "position": "bottom", // Waybar position (top|bottom|left|right)
+  "height": 35, // Waybar height (to be removed for auto height)
+  // "width": 1280, // Waybar width
+  "spacing": 4, // Gaps between modules (4px)
+  // Choose the order of the modules
+  "modules-left": [
+    "custom/powermenu",
+    "hyprland/workspaces",
+    "hyprland/window",
+    "custom/media",
+  ],
+  "modules-center": ["hyprland/submap"],
+  "modules-right": [
+    "tray",
+    "cpu",
+    "memory",
+    "custom/network",
+    "custom/weather",
+    "backlight",
+    "pulseaudio",
+    "network",
+    "battery",
+    "swaync",
+    "clock",
+  ],
+  // "modules-right": ["tray", "pulseaudio", "network", "cpu", "memory", "temperature", "backlight", "keyboard-state", "battery", "battery#bat2", "custom/network", "custom/weather", "clock"],
+  // Modules configuration
+  // "hyprland/workspaces": {
+  //     "disable-scroll": true,
+  //     "all-outputs": true,
+  //     "warp-on-scroll": false,
+  //     "format": "{name}: {icon}",
+  //     "format-icons": {
+  //         "1": "",
+  //         "2": "",
+  //         "3": "",
+  //         "4": "",
+  //         "5": "",
+  //         "urgent": "",
+  //         "focused": "",
+  //         "default": ""
+  //     }
+  // },
+  "keyboard-state": {
+    "numlock": true,
+    "capslock": true,
+    "format": "{name} {icon}",
+    "format-icons": {
+      "locked": "",
+      "unlocked": "",
+    },
+  },
+  "hyprland/workspaces": {
+    "on-click": "activate",
+    "on-scroll-up": "hyprctl dispatch workspace e+1",
+    "on-scroll-down": "hyprctl dispatch workspace e-1",
+  },
+  "hyprland/mode": {
+    "format": "<span style=\"italic\">{}</span>",
+  },
+  "hyprland/window": {
+    "format": "   {class}",
+    "max-length": 50,
+  },
+  "hyprland/submap": {
+    "format": "✌️ {}",
+    "max-length": 8,
+    "tooltip": false,
+  },
+  "mpd": {
+    "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ {volume}% ",
+    "format-disconnected": "Disconnected ",
+    "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped ",
+    "unknown-tag": "N/A",
+    "interval": 2,
+    "consume-icons": {
+      "on": " ",
+    },
+    "random-icons": {
+      "off": "<span color=\"#f53c3c\"></span> ",
+      "on": " ",
+    },
+    "repeat-icons": {
+      "on": " ",
+    },
+    "single-icons": {
+      "on": "1 ",
+    },
+    "state-icons": {
+      "paused": "",
+      "playing": "",
+    },
+    "tooltip-format": "MPD (connected)",
+    "tooltip-format-disconnected": "MPD (disconnected)",
+  },
+  "idle_inhibitor": {
+    "format": "{icon}",
+    "format-icons": {
+      "activated": "",
+      "deactivated": "",
+    },
+  },
+  "tray": {
+    // "icon-size": 21,
+    "spacing": 10,
+  },
+  "clock": {
+    "timezone": "America/Chicago",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+    "format-alt": "{:%Y-%m-%d}   ",
+    "format": "{:%H:%M}  ",
+  },
+  "cpu": {
+    //"format": " {usage}%",
+    "format": "󰻠 {usage}%",
+    "tooltip": false,
+  },
+  "memory": {
+    "format": "󰍛 {}%",
+  },
+  "temperature": {
+    // "thermal-zone": 2,
+    // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+    "critical-threshold": 80,
+    // "format-critical": "{temperatureC}°C {icon}",
+    "format": "{temperatureC}°C {icon}",
+    "format-icons": ["", "", ""],
+  },
+  "backlight": {
+    // "device": "acpi_video1",
+    // "format": "{percent}% {icon}",
+    "format": "{icon}",
+    "format-icons": ["", "", "", "", "", "", "", "", ""],
+    "tooltip-format": "{percent}%",
+  },
+  "battery": {
+    "states": {
+      // "good": 95,
+      "warning": 30,
+      "critical": 15,
+    },
+    "format": "{icon} ",
+    "format-charging": "{icon}  󱐌",
+    "format-plugged": "{icon}  󰚥",
+    "format-alt": "{time} {icon} ",
+    "tooltip-format": "{capacity}%",
+    // "format-good": "", // An empty format will hide the module
+    // "format-full": "",
+    "format-icons": ["", "", "", "", ""],
+  },
+  "battery#bat2": {
+    "bat": "BAT2",
+  },
+  "network": {
+    // "interface": "wlp2*", // (Optional) To force the use of this interface
+    "format-wifi": "{icon}",
+    "format-ethernet": "󰈀",
+    "tooltip-format-ethernet": "{ipaddr}/{cidr} - {ifname} via {gwaddr}",
+    "tooltip-format-wifi": "{essid} ({signalStrength}%)",
+    "format-linked": "{ifname} (No IP) 󰤫",
+    "format-disconnected": "󰤭",
+    "format-alt": "{essid} ({signalStrength}%) {icon} ",
+    "format-icons": ["󰤟", "󰤢", "󰤥", "󰤨"],
+  },
+  "pulseaudio": {
+    "scroll-step": 5, // %, can be a float
+    "format": "{icon}",
+    "format-bluetooth": "{icon} 󰂯",
+    "format-bluetooth-muted": "{icon} 󰂯",
+    "format-muted": "󰝟",
+    "tooltip-format": "{volume}% - {format_source}",
+    //"format": "{volume}% {icon} {format_source}",
+    //"format-bluetooth": "{volume}% {icon} 󰂯",
+    //"format-muted": "󰝟 {format_source}",
+    //"format-source": "{volume}% ",
+    //"format-source-muted": "",
+    "format-icons": {
+      "headphone": "󰋋",
+      "hands-free": "󰋎",
+      "headset": "󰋎",
+      "phone": "󰏲",
+      "portable": "󰏲",
+      "car": "󰞪",
+      "default": ["󰕿", "󰖀", "󰕾"],
+    },
+    "on-click": "pavucontrol",
+  },
+  "custom/media": {
+    "format": "{icon} {}",
+    "return-type": "json",
+    "max-length": 40,
+    "format-icons": {
+      "spotify": "",
+      "default": "🎜",
+    },
+    "escape": true,
+    "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null", // Script in resources folder
+    // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
+  },
+  "custom/powermenu": {
+    "return-type": "json",
+    "exec": "~/.config/waybar/modules/powericon.sh",
+    "format": "{}",
+    "format-icons": [""],
+    "interval": 3600,
+    "escape": true,
+    "on-click": "rofi -show power-menu -modi power-menu:$HOME/.config/scripts/rofi-power-menu",
+  },
+  "custom/weather": {
+    "return-type": "json",
+    "exec": "~/.config/waybar/modules/weather.sh",
+    "format": "{}",
+    "restart-interval": 1800,
+    "escape": true,
+  },
+  "custom/network": {
+    "return-type": "json",
+    "exec": "~/.config/waybar/modules/network.sh",
+    "format": "{}",
+    "restart-interval": 5,
+    "escape": true,
+  },
+}

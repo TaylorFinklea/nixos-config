@@ -1,0 +1,12 @@
+\#*
+*.swp
+result
+nohup.out
+flake.lock
+.aider*
+#.env
+node_modules/
+*.log
+lazy-lock.json
+.DS_Store
+nixos-config-git-crypt.key

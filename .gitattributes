@@ -1,0 +1,85 @@
+# Git-crypt configuration for encrypting sensitive files
+
+# Environment files containing secrets
+docker/.env filter=git-crypt diff=git-crypt
+docker/**/.env filter=git-crypt diff=git-crypt
+**/.env.local filter=git-crypt diff=git-crypt
+**/.env.production filter=git-crypt diff=git-crypt
+**/.env.staging filter=git-crypt diff=git-crypt
+
+# LibreChat configuration with API keys and tokens
+docker/librechat/librechat.yaml filter=git-crypt diff=git-crypt
+
+# Docker compose files are now clean - secrets extracted to .env files
+# docker/docker-compose.yml filter=git-crypt diff=git-crypt
+# docker/lothal/docker-compose.yml filter=git-crypt diff=git-crypt
+
+# Common secret file patterns
+**/secrets.* filter=git-crypt diff=git-crypt
+**/private.* filter=git-crypt diff=git-crypt
+**/*secret* filter=git-crypt diff=git-crypt
+**/*credential* filter=git-crypt diff=git-crypt
+
+# SSH and GPG keys
+**/*.pem filter=git-crypt diff=git-crypt
+**/*.key filter=git-crypt diff=git-crypt
+**/*.p12 filter=git-crypt diff=git-crypt
+**/*.pfx filter=git-crypt diff=git-crypt
+
+# Certificate files that might contain private keys
+**/*.crt filter=git-crypt diff=git-crypt
+**/*.cert filter=git-crypt diff=git-crypt
+
+# Configuration files that commonly contain secrets
+**/config.json filter=git-crypt diff=git-crypt
+**/auth.json filter=git-crypt diff=git-crypt
+**/credentials.json filter=git-crypt diff=git-crypt
+
+# Nix files that might contain secrets
+**/*-secrets.nix filter=git-crypt diff=git-crypt
+**/*_secrets.nix filter=git-crypt diff=git-crypt
+**/secrets/*.nix filter=git-crypt diff=git-crypt
+
+# Docker compose files that might contain inline secrets
+# (Only encrypt if they contain secrets - review each file individually)
+# **/docker-compose*.yml filter=git-crypt diff=git-crypt
+# For now, we've extracted secrets to .env files instead
+
+# Additional environment file patterns
+**/.env.* filter=git-crypt diff=git-crypt
+**/env.* filter=git-crypt diff=git-crypt
+
+# Kubernetes secrets and config
+**/secrets.yaml filter=git-crypt diff=git-crypt
+**/secrets.yml filter=git-crypt diff=git-crypt
+**/*-secret.yaml filter=git-crypt diff=git-crypt
+**/*-secret.yml filter=git-crypt diff=git-crypt
+
+# Terraform files with sensitive data
+**/*.tfvars filter=git-crypt diff=git-crypt
+**/terraform.tfvars filter=git-crypt diff=git-crypt
+
+# Ansible vault files
+**/vault.yml filter=git-crypt diff=git-crypt
+**/vault.yaml filter=git-crypt diff=git-crypt
+**/*vault* filter=git-crypt diff=git-crypt
+
+# Database configuration and dumps
+**/*.sql filter=git-crypt diff=git-crypt
+**/*.dump filter=git-crypt diff=git-crypt
+**/database.yml filter=git-crypt diff=git-crypt
+**/database.yaml filter=git-crypt diff=git-crypt
+
+# API keys and tokens
+**/*apikey* filter=git-crypt diff=git-crypt
+**/*api_key* filter=git-crypt diff=git-crypt
+**/*api-key* filter=git-crypt diff=git-crypt
+**/*token* filter=git-crypt diff=git-crypt
+**/*bearer* filter=git-crypt diff=git-crypt
+
+# Security audit reports (may contain sensitive findings)
+**/security-audit/** filter=git-crypt diff=git-crypt
+**/*audit*report* filter=git-crypt diff=git-crypt
+
+common/packages/doom/doom/config.el filter=git-crypt diff=git-crypt
+docker/docker-compose.yml filter=git-crypt diff=git-crypt

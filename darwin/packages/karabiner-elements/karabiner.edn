@@ -1,0 +1,438 @@
+;https://github.com/JoshuaManuel/Karabiner-Elements-Key-List
+{
+  :profiles {
+    :Default {
+        :default    true
+        :sim        50      ;; if keydown event for two different keys are pressed within :sim ms, the keypresses are considered simultaneous
+        :delay      1000     ;; after :delay ms, the key press is considered to be delayed (TODO WHAT IS THIS??)
+        :alone      200    ;; if keyup event comes within :alone ms from keydown, the key is not just pressed but held
+        :held       250 ;; key is fired twice when :held ms is elapsed (otherwise seen as a hold command) (TODO WHAT IS THIS??)
+    }
+  } ;; profiles
+
+  ;; you can create templates for running shell commands. These follow clojure string template syntax.
+  :templates {
+    :echo "echo \"%s\""
+    :open "open \"%s\""
+    :open-app "open -a \"%s\""
+  } ;; templates
+  :simlayers {
+    :l2 {:key :f}
+    :l3 {:key :d}
+    :l4 {:key :s}
+    :l5 {:key :k}
+    :l6 {:key :l}
+    :l7 {:key :semicolon}
+    :l8 {:key :spacebar}
+  }
+
+  :main [
+    {:des "l8 - mouse mode"
+    ;; allows scrolling the mouse cursor with keyboard keys
+    ;; f + m - switch to mouse mode
+    ;; while in mouse mode:
+    ;; esc = exit mouse mode
+    ;; h,j,k,l = use vim motions to move mouse cursor coarsely
+    ;; Shift + h,j,k,l = use vim motions to move mouse cursor precisely
+    ;; u = left click
+    ;; i = right click
+      :rules [
+          :l8
+          ;==== TOP ROW ====
+          ;[:##q :q]
+          [:##w {:mkey {:hwheel 5 :speed 10}}]
+          [:##e {:mkey {:vwheel -5 :speed 10}}]
+          [:##r {:mkey {:hwheel -5 :speed 10}}]
+          ;[:##t :b]
+
+          ;[:##u :j]
+          ;[:##i :l]
+          [:##o {:mkey {:y -3000}}]
+          ;[:##p :y]
+          ;[:##open_bracket :']
+
+          ;==== MID ROW ====
+          [:##a {:pkey :button4}]
+          [:##s {:pkey :button2}]
+          [:##d {:mkey {:vwheel 5 :speed 10}}]
+          [:##f {:pkey :button1}]
+          [:##g {:pkey :button5}]
+
+          ;[:##j :m]
+          [:##k {:mkey {:x -3000}}]
+          [:##l {:mkey {:y 3000}}]
+          [:##semicolon {:mkey {:x 3000}}]
+          ;[:##quote :o]
+
+          ;==== BOT ROW ====
+          ;[:##left_shift :z]
+          ;[:##z :z]
+          [:##x {:pkey :button3}]
+          ;[:##c :d]
+          ;[:##v :v]
+
+          ;[:##m :k]
+          ;[:##comma :h]
+          ;[:##period :!R1]
+          ;[:##slash :!Rslash]
+          ;[:##right_shift :semicolon]
+
+          ;==== SPC ROW ====
+          [:##left_command [["mouse-mode" 0] [:noti :mmode]]]
+          ;[:##spacebar :vk_none {:alone :spacebar}]
+          ;[:##spacebar :spacebar]
+          ;[:##right_command :right_command nil {:alone :tab}]
+        [:m [["mouse-mode" 1] [:noti :mmode "Hit ESC to quit Mouse Mode"]] :l8]
+        :mouse-mode
+          [:escape [["mouse-mode" 0] [:noti :mmode]]]
+          ;==== TOP ROW ====
+          ;[:##q :q]
+          [:##w {:mkey {:hwheel 5 :speed 10}}]
+          [:##e {:mkey {:vwheel -5 :speed 10}}]
+          [:##r {:mkey {:hwheel -5 :speed 10}}]
+          ;[:##t :b]
+
+          ;[:##u :j]
+          ;[:##i :l]
+          [:##o {:mkey {:y -3000}}]
+          ;[:##p :y]
+          ;[:##open_bracket :']
+
+          ;==== MID ROW ====
+          [:##a {:pkey :button4}]
+          [:##s {:pkey :button2}]
+          [:##d {:mkey {:vwheel 5 :speed 10}}]
+          [:##f {:pkey :button1}]
+          [:##g {:pkey :button5}]
+
+          ;[:##j :m]
+          [:##k {:mkey {:x -3000}}]
+          [:##l {:mkey {:y 3000}}]
+          [:##semicolon {:mkey {:x 3000}}]
+          ;[:##quote :o]
+
+          ;==== BOT ROW ====
+          ;[:##left_shift :z]
+          ;[:##z :x]
+          ;[:##x :c]
+          ;[:##c :d]
+          ;[:##v :v]
+
+          ;[:##m :k]
+          ;[:##comma :h]
+          ;[:##period :!R1]
+          ;[:##slash :!Rslash]
+          ;[:##right_shift :semicolon]
+
+          ;==== SPC ROW ====
+          [:##left_command [["mouse-mode" 0] [:noti :mmode]]]
+          ;[:##spacebar :vk_none {:alone :spacebar}]
+          ;[:##right_command :right_command nil {:alone :tab}]
+      ]
+    }
+    {:des "l2 - navigation"
+      :rules [
+        :l2
+          ;==== TOP ROW ====
+          ;[:##q :q]
+          ;[:##w :w]
+          ;[:##e :f]
+          ;[:##r :p]
+          ;[:##t :b]
+
+          ;[:##u :j]
+          [:##i :page_up]
+          [:##o :up_arrow]
+          [:##p :home]
+          ;[:##open_bracket :quote]
+
+          ;==== MID ROW ====
+          ;[:##a :escape]
+          ;[:##s :delete_or_backspace]
+          ;[:##d :delete_forward]
+          ;[:##f :t]
+          ;[:##g :g]
+
+          ;[:##j :m]
+          [:##k :left_arrow]
+          [:##l :down_arrow]
+          [:##semicolon :right_arrow]
+          ;[:##quote :o]
+
+          ;==== BOT ROW ====
+          ;[:##left_shift :z]
+          ;[:##z :x]
+          ;[:##x :c]
+          ;[:##c :d]
+          ;[:##v :v]
+
+          ;[:##m :k]
+          [:##comma :page_down]
+          [:##period :!QRx]
+          [:##slash :end]
+          ;[:##right_shift :semicolon]
+
+          ;==== SPC ROW ====
+          [:##left_command :escape]
+          [:##spacebar :escape]
+          [:##right_command :delete_forward]
+      ]
+    }
+
+    {:des "l3 - numpad"
+      :rules [
+        :l3
+          ;==== TOP ROW ====
+          ;[:##q :q]
+          ;[:##w :w]
+          ;[:##e :f]
+          ;[:##r :p]
+          ;[:##t :b]
+
+          [:##u :keypad_slash]
+          [:##i :keypad_7]
+          [:##o :keypad_8]
+          [:##p :keypad_9]
+          [:##open_bracket :keypad_hyphen]
+
+          ;==== MID ROW ====
+          ;[:##a :a]
+          [:##s :keypad_comma]
+          ;[:##d :vk_none {:alone :vk_none :repeat false}]
+          [:##f :keypad_period]
+          ;[:##g :g]
+
+          [:##j :keypad_asterisk]
+          [:##k :keypad_4]
+          [:##l :keypad_5]
+          [:##semicolon :keypad_6]
+          [:##quote :keypad_plus]
+
+          ;==== BOT ROW ====
+          ;[:##left_shift :z]
+          ;[:##z :x]
+          ;[:##x :c]
+          ;[:##c :d]
+          ;[:##v :v]
+
+          ;[:##m :m]
+          [:##comma :keypad_1]
+          [:##period :keypad_2]
+          [:##slash :keypad_3]
+          [:##right_shift :keypad_equal_sign]
+
+          ;==== SPC ROW ====
+          ;[:##left_command :keypad_0]
+          [:##spacebar :return_or_enter]
+          [:##right_command :keypad_0]
+      ]
+    }
+    {:des "l4 - media"
+      :rules [
+        :l4
+          ;==== TOP ROW ====
+          ;[:##q :q]
+          ;[:##w :w]
+          [:##e :!Qf]
+          ;[:##r :p]
+          ;[:##t :b]
+
+          ;[:##u :keypad_slash]
+          ;[:##i :volume_decrement]
+          ;[:##o :mute]
+          ;[:##p :volume_increment]
+          ;[:##open_bracket :keypad_hyphen]
+
+          ;==== MID ROW ====
+          [:##a :!Qk]
+          ;[:##s :vk_none {:alone :vk_none :repeat false}]
+          [:##d :!Qv]
+          [:##f :!Qc]
+          [:##g :!Qx]
+
+          ;[:##j :vk_mission_control]
+          ;[:##k :rewind]
+          ;[:##l :play_or_pause]
+          ;[:##semicolon :fastforward]
+          [:##quote :!Qspacebar]
+
+          ;==== BOT ROW ====
+          ;[:##left_shift :z]
+          ;[:##z :x]
+          ;[:##x :c]
+          [:##c :!Qz]
+          ;[:##v :d]
+
+          ;[:##m :k]
+          ;[:##comma :apple_display_brightness_decrement]
+          ;[:##period :apple_display_brightness_increment]
+          ;[:##slash :vk_launchpad]
+          ;[:##right_shift :semicolon]
+
+          ;==== SPC ROW ====
+          ;[:##left_command :!QWEright_shift nil {:alone :escape}]
+          ;[:##spacebar :spacebar]
+          ;[:##right_command :right_command nil {:alone :tab}]
+      ]
+    }
+    {:des "l5 - symbols"
+      :rules [
+        :l5
+          ;==== TOP ROW ====
+          [:##q :grave_accent_and_tilde]
+          [:##w :!Rbackslash] ;
+          [:##e :open_bracket]
+          [:##r :close_bracket]
+          [:##t :!R4] ;$
+
+          ;[:##u :j]
+          ;[:##i :l]
+          [:##o :!R8] ;*
+          [:##p :!Rhyphen] ;_
+          [:##open_bracket :!Requal_sign] ;+
+
+          ;==== MID ROW ====
+          [:##a :!R3] ;#
+          [:##s :slash]
+          [:##d :!R9] ;(
+          [:##f :!R0] ;)
+          [:##g :!R5] ;%
+
+          ;[:##j :m]
+          ;[:##k :vk_none {:alone :vk_none :repeat false}]
+          [:##l :!R2] ;@
+          [:##semicolon :hyphen]
+          [:##quote :!Rsemicolon] ;:
+
+          ;==== BOT ROW ====
+          [:##left_shift :!R6] ;^
+          [:##z :backslash]
+          [:##x :!Ropen_bracket]
+          [:##c :!Rclose_bracket]
+          [:##v :!R7] ;&
+
+          ;[:##m :k]
+          ;[:##comma :h]
+          [:##period :!R1] ;!
+          [:##slash :!Rslash] ;
+          [:##right_shift :semicolon]
+
+          ;==== SPC ROW ====
+          ;[:##left_command :!QWEright_shift nil {:alone :escape}]
+          [:##spacebar :!Rgrave_accent_and_tilde]
+          [:##right_command :equal_sign]
+      ]
+    }
+    {:des "l6 - function"
+      :rules [
+        :l6
+          ;==== TOP ROW ====
+          [:##q :keypad_num_lock]
+          [:##w :f17] ;
+          [:##e :f18]
+          [:##r :f19]
+          [:##t :f20] ;$
+
+          ;[:##u :f21]
+          ;[:##i :f22]
+          ;[:##o :!R8]
+          ;[:##p :f23]
+          ;[:##open_bracket :f24]
+
+          ;==== MID ROW ====
+          [:##a :caps_lock]
+          [:##s :f9]
+          [:##d :f10]
+          [:##f :f11]
+          [:##g :f12]
+
+          [:##j :f13]
+          [:##k :f14]
+          ;[:##l :vk_none {:alone :vk_none :repeat false}]
+          [:##semicolon :f15]
+          [:##quote :f16] ;:
+
+          ;==== BOT ROW ====
+          [:##left_shift :scroll_lock]
+          [:##z :f1]
+          [:##x :f2]
+          [:##c :f3]
+          [:##v :f4]
+
+          [:##m :f5]
+          [:##comma :f6]
+          ;[:##period :!R1] ;!
+          [:##slash :f7] ;
+          [:##right_shift :f8]
+
+          ;==== SPC ROW ====
+          ;[:##left_command :!QWEright_shift nil {:alone :escape}]
+          ;[:##spacebar :spacebar]
+          ;[:##right_command :right_command nil {:alone :tab}]
+      ]
+    }
+    {:des "colemac-caws"
+      :rules[
+        ;==== FN ROW ====
+
+        ;==== NUM ROW ====
+
+        ;==== TOP ROW ====
+        [:##q :q]
+        [:##w :left_control nil {:alone :w}]
+        [:##e :left_option nil {:alone :f}]
+        [:##r :p]
+        [:##t :b]
+        [:##y :vk_none]
+        [:##u :j]
+        [:##i :l]
+        [:##o :right_option nil {:alone :u}]
+        [:##p :right_control nil {:alone :y}]
+        [:##open_bracket :quote]
+        [:##close_bracket :vk_none]
+        [:##backslash :vk_none]
+
+        ;==== MID ROW ====
+        [:##a :left_shift nil {:alone :a}]
+        [:##s :r]
+        [:##d :s]
+        [:##f :t]
+        [:##g :g]
+        [:##h :vk_none]
+        [:##j :m]
+        [:##k :n]
+        [:##l :e]
+        [:##semicolon :i]
+        [:##quote :right_shift nil {:alone :o}]
+
+        ;==== BOT ROW ====
+        [:##left_shift :!QWEright_shift nil {:alone :z}]
+        [:##z :x]
+        [:##x :c]
+        [:##c :d]
+        [:##v :v]
+        [:##b :vk_none]
+        [:##n :vk_none]
+        [:##m :k]
+        [:##comma :h]
+        [:##period :comma]
+        [:##slash :period]
+        [:##right_shift :semicolon]
+
+        ;==== SPC ROW ====
+        [:##fn :vk_none]
+        [:##left_control :vk_none]
+        [:##left_option :vk_none]
+        [:##left_command :left_command nil {:alone :tab}]
+        [:##spacebar :spacebar]
+        [:##right_command :delete_or_backspace]
+        [:##right_option :right_command nil {:alone :return_or_enter}]
+      ]
+    }
+  ]
+
+  :devices {
+    :macbook-internal [{:product_id 638 :vendor_id 1452}]
+  }
+
+}

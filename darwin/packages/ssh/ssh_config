@@ -1,0 +1,12 @@
+Host awing
+  HostName 100.81.80.56
+  Port 22
+  User tfinklea
+  IdentitiesOnly yes
+  IdentityFile ~/.ssh/id_ed25519
+Host awing-local
+  HostName 10.10.1.11
+  Port 22
+  User tfinklea
+  IdentitiesOnly yes
+  IdentityFile ~/.ssh/id_ed25519

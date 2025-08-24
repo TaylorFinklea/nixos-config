@@ -1,0 +1,49 @@
+{ config, pkgs, ... }:
+ 
+{
+  programs.fish.enable = true;
+  programs.git.enable = true;
+
+  environment.systemPackages = with pkgs;
+    [
+    # Functional testing framework using headless chrome
+    cypress
+    chromedriver
+
+    fontconfig
+    font-manager
+
+    gnumake
+    gnugrep
+    home-manager
+
+    # inotifywait, inotifywatch
+    # For file system events
+    inotify-tools
+    libnotify
+    lshw
+    toybox
+    wev
+    brightnessctl
+
+    openssh
+
+    pinentry-curses
+    postgresql
+
+    # Our file browser
+    pcmanfm
+
+    qmk
+    rnix-lsp # lsp-mode for nix
+    screenkey
+    sqlite
+    tree
+    unixtools.ifconfig
+    unixtools.netstat
+    xdg-utils
+    unzip
+
+    gccgo
+  ];
+}
