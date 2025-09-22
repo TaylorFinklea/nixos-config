@@ -2,7 +2,6 @@
 {
   imports = [
     ../../common
-    ../../darwin/packages/sketchybar/work.nix
     ../../darwin/packages/sketchyvim
     ../../darwin/packages/xbar
     ../../darwin/packages/wezterm

@@ -64,6 +64,8 @@ CASKS=(
     "lunar"
     "kindavim"
     "wooshy"
+    "shortcat"
+    "superkey"
     "scrolla"
     "shottr"
     "vmware-fusion"

@@ -10,15 +10,15 @@ after-login-command = []
 # 'after-startup-command' is run after 'after-login-command'
 # Available commands : https://nikitabobko.github.io/AeroSpace/commands
 after-startup-command = [
-    'exec-and-forget borders active_color=0xff18cae6 inactive_color=0x00494d64 width=8.0',
-    'exec-and-forget sketchybar',
+  'exec-and-forget borders active_color=0xff18cae6 inactive_color=0x00494d64 width=8.0',
+  'exec-and-forget sketchybar',
 ]
 
 # Notify Sketchybar about workspace change
 exec-on-workspace-change = [
-    '/bin/bash',
-    '-c',
-    'sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE',
+  '/bin/bash',
+  '-c',
+  'sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE',
 ]
 
 # Start AeroSpace at login
@@ -48,7 +48,7 @@ default-root-container-orientation = 'auto'
 # Fallback value (if you omit the key): on-focused-monitor-changed = []
 #on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 on-focus-changed = [
-    'move-mouse window-lazy-center',
+  'move-mouse window-lazy-center',
 ] # Mouse lazily follows any focus (window or workspace)
 
 # You can effectively turn off macOS "Hide application" (cmd-h) feature by toggling this flag
@@ -88,7 +88,7 @@ preset = 'qwerty'
 inner.horizontal = 10
 inner.vertical = 10
 outer.left = 10
-outer.bottom = 45
+outer.bottom = 10
 outer.top = 10
 outer.right = 10
 
@@ -206,8 +206,8 @@ i = ['join-with right', 'mode main']
 r = ['reload-config', 'mode main']
 x = ['flatten-workspace-tree', 'mode main'] # reset layout
 f = [
-    'layout floating tiling',
-    'mode main',
+  'layout floating tiling',
+  'mode main',
 ] # Toggle between floating and tiling layout
 #backspace = ['close-all-windows-but-current', 'mode main']
 
