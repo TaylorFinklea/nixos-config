@@ -11,7 +11,6 @@ after-login-command = []
 # Available commands : https://nikitabobko.github.io/AeroSpace/commands
 after-startup-command = [
   'exec-and-forget borders active_color=0xff18cae6 inactive_color=0x00494d64 width=8.0',
-  'exec-and-forget sketchybar',
 ]
 
 # Notify Sketchybar about workspace change
@@ -125,25 +124,25 @@ end tell'
 '''
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#focus
-alt-n = 'focus left --boundaries workspace --boundaries-action wrap-around-the-workspace --ignore-floating'
-alt-e = 'focus down --boundaries all-monitors-outer-frame --boundaries-action wrap-around-all-monitors --ignore-floating'
-alt-u = 'focus up --boundaries all-monitors-outer-frame --boundaries-action wrap-around-all-monitors --ignore-floating'
-alt-i = 'focus right --boundaries workspace --boundaries-action wrap-around-the-workspace --ignore-floating'
+alt-h = 'focus left --boundaries workspace --boundaries-action wrap-around-the-workspace --ignore-floating'
+alt-j = 'focus down --boundaries all-monitors-outer-frame --boundaries-action wrap-around-all-monitors --ignore-floating'
+alt-k = 'focus up --boundaries all-monitors-outer-frame --boundaries-action wrap-around-all-monitors --ignore-floating'
+alt-l = 'focus right --boundaries workspace --boundaries-action wrap-around-the-workspace --ignore-floating'
 
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace
-ctrl-alt-h = 'workspace 1'
+ctrl-alt-m = 'workspace 1'
 ctrl-alt-comma = 'workspace 2'
 ctrl-alt-period = 'workspace 3'
-ctrl-alt-n = 'workspace 4'
-ctrl-alt-e = 'workspace 5'
-ctrl-alt-i = 'workspace 6'
-ctrl-alt-l = 'workspace 7'
-ctrl-alt-u = 'workspace 8'
-ctrl-alt-y = 'workspace 9'
-ctrl-alt-k = 'workspace 10'     # In your config, you can drop workspace bindings that you don't need
-ctrl-alt-m = 'workspace 11'
-ctrl-alt-j = 'workspace 12'
+ctrl-alt-j = 'workspace 4'
+ctrl-alt-k = 'workspace 5'
+ctrl-alt-l = 'workspace 6'
+ctrl-alt-u = 'workspace 7'
+ctrl-alt-i = 'workspace 8'
+ctrl-alt-o = 'workspace 9'
+ctrl-alt-n = 'workspace 10'     # In your config, you can drop workspace bindings that you don't need
+ctrl-alt-h = 'workspace 11'
+ctrl-alt-y = 'workspace 12'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
 alt-b = 'workspace-back-and-forth'
@@ -158,35 +157,35 @@ ctrl-alt-r = 'mode resize'
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
 [mode.resize.binding]
 # See: https://nikitabobko.github.io/AeroSpace/commands#resize
-ctrl-alt-n = 'resize width -50'
-ctrl-alt-i = 'resize width +50'
-ctrl-alt-e = 'resize height -50'
-ctrl-alt-u = 'resize height +50'
+ctrl-alt-h = 'resize width -50'
+ctrl-alt-j = 'resize width +50'
+ctrl-alt-k = 'resize height -50'
+ctrl-alt-l = 'resize height +50'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move
-cmd-alt-n = 'move left'
-cmd-alt-e = 'move down'
-cmd-alt-u = 'move up'
-cmd-alt-i = 'move right'
+cmd-alt-h = 'move left'
+cmd-alt-j = 'move down'
+cmd-alt-k = 'move up'
+cmd-alt-l = 'move right'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
-ctrl-shift-h = 'move-node-to-workspace 1'
+ctrl-shift-m = 'move-node-to-workspace 1'
 ctrl-shift-comma = 'move-node-to-workspace 2'
 ctrl-shift-period = 'move-node-to-workspace 3'
-ctrl-shift-n = 'move-node-to-workspace 4'
-ctrl-shift-e = 'move-node-to-workspace 5'
-ctrl-shift-i = 'move-node-to-workspace 6'
-ctrl-shift-l = 'move-node-to-workspace 7'
-ctrl-shift-u = 'move-node-to-workspace 8'
-ctrl-shift-y = 'move-node-to-workspace 9'
-ctrl-shift-k = 'move-node-to-workspace 10'
-ctrl-shift-m = 'move-node-to-workspace 11'
-ctrl-shift-j = 'move-node-to-workspace 12'
+ctrl-shift-j = 'move-node-to-workspace 4'
+ctrl-shift-k = 'move-node-to-workspace 5'
+ctrl-shift-l = 'move-node-to-workspace 6'
+ctrl-shift-u = 'move-node-to-workspace 7'
+ctrl-shift-i = 'move-node-to-workspace 8'
+ctrl-shift-o = 'move-node-to-workspace 9'
+ctrl-shift-n = 'move-node-to-workspace 10'
+ctrl-shift-h = 'move-node-to-workspace 11'
+ctrl-shift-y = 'move-node-to-workspace 12'
 
-alt-n = 'focus left --boundaries workspace --boundaries-action wrap-around-the-workspace --ignore-floating'
-alt-e = 'focus down --boundaries all-monitors-outer-frame --boundaries-action wrap-around-all-monitors --ignore-floating'
-alt-u = 'focus up --boundaries all-monitors-outer-frame --boundaries-action wrap-around-all-monitors --ignore-floating'
-alt-i = 'focus right --boundaries workspace --boundaries-action wrap-around-the-workspace --ignore-floating'
+alt-h = 'focus left --boundaries workspace --boundaries-action wrap-around-the-workspace --ignore-floating'
+alt-j = 'focus down --boundaries all-monitors-outer-frame --boundaries-action wrap-around-all-monitors --ignore-floating'
+alt-k = 'focus up --boundaries all-monitors-outer-frame --boundaries-action wrap-around-all-monitors --ignore-floating'
+alt-l = 'focus right --boundaries workspace --boundaries-action wrap-around-the-workspace --ignore-floating'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#layout
 alt-period = 'layout tiles horizontal vertical'
@@ -198,10 +197,10 @@ ctrl-alt-z = 'mode main'
 [mode.service.binding]
 # sticky is not yet supported https://github.com/nikitabobko/AeroSpace/issues/2
 #s = ['layout sticky tiling', 'mode main']
-n = ['join-with left', 'mode main']
-e = ['join-with down', 'mode main']
-u = ['join-with up', 'mode main']
-i = ['join-with right', 'mode main']
+h = ['join-with left', 'mode main']
+j = ['join-with down', 'mode main']
+k = ['join-with up', 'mode main']
+l = ['join-with right', 'mode main']
 
 r = ['reload-config', 'mode main']
 x = ['flatten-workspace-tree', 'mode main'] # reset layout
