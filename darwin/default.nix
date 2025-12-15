@@ -8,7 +8,6 @@ in {
     ./services.nix
     ./preferences.nix
     ./brew.nix
-    ./activation-scripts.nix
   ];
 
   users.users.${vars.user} = {

@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 let
-  hostname = "roshar";
+  hostname = "Scadrial";
 
 in {
   imports = [
