@@ -16,17 +16,17 @@ git clone <your-repo-url> nixos-config
 cd ~/git/nixos-config
 ```
 
-### 3. Run bootstrap script
+### 3. Run installation script
 ```bash
 cd ~/git/nixos-config/chezmoi
-./scripts/bootstrap.sh
+./scripts/install.sh
 ```
 
-The bootstrap script will:
+The installation script will:
 - Install chezmoi
 - Initialize your dotfiles
-- Optionally install essential CLI tools
-- Optionally run the full Homebrew sync
+- Auto-detect work vs personal computer
+- Optionally install packages (work or personal configuration)
 
 ### 4. Restart your shell
 ```bash
@@ -62,8 +62,11 @@ chezmoi status
 
 #### Full development environment
 ```bash
-cd ~/git/nixos-config/home/work
-./homebrew.sh
+# For work computer
+./scripts/install-homebrew-work.sh
+
+# For personal computer
+./scripts/install-homebrew-personal.sh
 ```
 
 ## Customization

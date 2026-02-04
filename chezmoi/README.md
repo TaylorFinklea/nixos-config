@@ -22,7 +22,20 @@ brew install chezmoi
 sh -c "$(curl -fsLS get.chezmoi.io)"
 ```
 
-### 2. Initialize with this repository
+### 2. Run the installation script
+
+```bash
+cd ~/git/nixos-config/chezmoi
+./scripts/install.sh
+```
+
+This will:
+- Install chezmoi if needed
+- Initialize your dotfiles
+- Auto-detect work vs personal computer
+- Optionally install packages
+
+**Or do it manually:**
 
 ```bash
 # If this is your first time setting up chezmoi with this config
@@ -36,9 +49,12 @@ chezmoi apply -v
 ### 3. Install Homebrew packages (macOS)
 
 ```bash
-# Run the homebrew sync script from home/work
-cd ~/git/nixos-config/home/work
-./homebrew.sh
+# Work configuration (excludes Zed, Insomnia, Bruno, Ollama, Voiceink)
+cd ~/git/nixos-config/chezmoi
+./scripts/install-homebrew-work.sh
+
+# OR Personal configuration (full suite)
+./scripts/install-homebrew-personal.sh
 ```
 
 ## Directory Structure

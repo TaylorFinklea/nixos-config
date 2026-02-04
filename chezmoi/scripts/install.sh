@@ -139,22 +139,59 @@ fi
 
 # Step 8: Install development tools
 echo ""
-read -p "Install development tools and languages? (y/N) " -n 1 -r
-echo
-if [[ $REPLY =~ ^[Yy]$ ]]; then
-    info "Installing development tools..."
-    
-    # Run the full homebrew sync script
-    HOMEBREW_SCRIPT="$HOME/git/nixos-config/home/work/homebrew.sh"
-    if [ -f "$HOMEBREW_SCRIPT" ]; then
-        bash "$HOMEBREW_SCRIPT"
-    else
-        warn "Homebrew sync script not found at $HOMEBREW_SCRIPT"
-        info "You can install packages manually or run the script later"
-    fi
+# Auto-detect system type based on hostname
+HOSTNAME=$(hostname -s)
+COMPUTER_NAME=$(scutil --get ComputerName 2>/dev/null || echo "$HOSTNAME")
+
+# Check if this is a work computer (contains "work", "it-", "corp", etc.)
+if [[ "$COMPUTER_NAME" =~ (work|it-|corp|company) ]] || [[ "$HOSTNAME" =~ (work|it-|corp|company) ]]; then
+    DETECTED_TYPE="work"
+    info "Detected WORK computer: $COMPUTER_NAME"
 else
-    warn "Skipped development tools installation"
+    DETECTED_TYPE="personal"
+    info "Detected PERSONAL computer: $COMPUTER_NAME"
 fi
+
+echo ""
+echo "Install Homebrew packages?"
+echo "  1) Yes, use detected configuration ($DETECTED_TYPE)"
+echo "  2) Work (excludes: Zed, Insomnia, Bruno, Ollama, Voiceink)"
+echo "  3) Personal (full suite)"
+echo "  4) Skip package installation"
+read -p "Choose [1-4] (default: 1): " -n 1 -r
+echo
+
+# Default to option 1 if user just presses enter
+REPLY=${REPLY:-1}
+
+case $REPLY in
+    1)
+        if [ "$DETECTED_TYPE" = "work" ]; then
+            info "Installing work configuration..."
+            bash "$SCRIPT_DIR/install-homebrew-work.sh"
+        else
+            info "Installing personal configuration..."
+            bash "$SCRIPT_DIR/install-homebrew-personal.sh"
+        fi
+        ;;
+    2)
+        info "Installing work configuration..."
+        bash "$SCRIPT_DIR/install-homebrew-work.sh"
+        ;;
+    3)
+        info "Installing personal configuration..."
+        bash "$SCRIPT_DIR/install-homebrew-personal.sh"
+        ;;
+    4)
+        warn "Skipped package installation"
+        ;;
+    *)
+        warn "Invalid choice. Skipping package installation."
+        info "You can run scripts manually later:"
+        info "  Work: ./scripts/install-homebrew-work.sh"
+        info "  Personal: ./scripts/install-homebrew-personal.sh"
+        ;;
+esac
 
 # Final messages
 echo ""

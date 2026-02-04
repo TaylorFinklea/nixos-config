@@ -68,6 +68,8 @@
 
 ## 📦 Package Installation Method Changed
 
+### Package Installation Method Changed
+
 ### Previously (home-manager/Nix)
 ```nix
 home.packages = with pkgs; [ ripgrep fd jq ... ];
@@ -75,9 +77,14 @@ home.packages = with pkgs; [ ripgrep fd jq ... ];
 
 ### Now (Homebrew)
 ```bash
-./home/work/homebrew.sh
-# or
-./scripts/install-essentials.sh  # for minimal install
+# Work computer (minimal professional tools)
+./scripts/install-homebrew-work.sh
+
+# Personal computer (full suite)
+./scripts/install-homebrew-personal.sh
+
+# Or just essentials
+./scripts/install-essentials.sh
 ```
 
 ### Package Categories in Homebrew Script
@@ -225,7 +232,13 @@ chezmoi apply -v
 
 ## 🚀 Next Steps
 
-1. **Test the migration:**
+1. **Run the installer:**
+   ```bash
+   cd ~/git/nixos-config/chezmoi
+   ./scripts/install.sh
+   ```
+   
+   **Or test manually:**
    ```bash
    cd ~/git/nixos-config/chezmoi
    chezmoi init --source=$PWD
