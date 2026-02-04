@@ -34,11 +34,11 @@ in {
       };
 
       dock = {
-        autohide = true;
+        autohide = false;
         show-recents = false;
         launchanim = true;
-        orientation = "left";
-        tilesize = 28;
+        orientation = "bottom";
+        tilesize = 60;
       };
 
       finder = {
@@ -100,11 +100,7 @@ in {
         };
 
       };
-    };
 
-    keyboard = {
-      enableKeyMapping = true;
-      remapCapsLockToControl = true;
     };
   };
 }
